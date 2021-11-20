@@ -7,6 +7,16 @@ var Parse = {
   server: `https://app-hrsei-api.herokuapp.com/api/chatterbox/messages/${window.CAMPUS}`,
 
   create: function(message, successCB, errorCB = null) {
+    $.ajax({
+      url: 'https://app-hrsei-api.herokuapp.com/api/chatterbox/messages/hr-sfo',
+      type: 'POST',
+      data: JSON.stringify(message),
+      contentType: 'application/json',
+      success: successCB,
+      error: errorCB || function(error) {
+        console.error('chatterbox: Failed to send messages', error);
+      }
+    });
     // TODO: send a request to the Parse API to save the message
   },
 
